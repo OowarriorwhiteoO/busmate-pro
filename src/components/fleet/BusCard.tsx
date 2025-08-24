@@ -9,8 +9,9 @@ export interface BusData {
   marca: 'Volvo' | 'Scania' | 'Foton';
   modelo: 'Eléctrico' | 'Petróleo';
   caracteristicas: string;
-  fallas: string;
-  cualidades: string;
+  calefaccion: 'Si' | 'No';
+  aireAcondicionado: 'Si' | 'No';
+  defectos: string;
   fechaFalla?: Date;
 }
 
@@ -93,26 +94,36 @@ export const BusCard = ({ bus, isAdmin, onEdit, onDelete }: BusCardProps) => {
           </div>
         )}
         
-        {bus.cualidades && (
+        {/* Calefacción y Aire Acondicionado */}
+        <div className="flex space-x-4">
           <div className="space-y-1">
-            <div className="flex items-center space-x-2 text-sm font-medium text-success">
-              <span className="text-lg">✨</span>
-              <span>Cualidades</span>
+            <div className="flex items-center space-x-2 text-sm font-medium text-muted-foreground">
+              <span className="text-lg">🔥</span>
+              <span>Calefacción</span>
             </div>
-            <p className="text-sm text-foreground line-clamp-2">
-              {bus.cualidades}
+            <p className="text-sm text-foreground">
+              {bus.calefaccion}
             </p>
           </div>
-        )}
+          <div className="space-y-1">
+            <div className="flex items-center space-x-2 text-sm font-medium text-muted-foreground">
+              <span className="text-lg">❄️</span>
+              <span>Aire Acondicionado</span>
+            </div>
+            <p className="text-sm text-foreground">
+              {bus.aireAcondicionado}
+            </p>
+          </div>
+        </div>
         
-        {bus.fallas && (
+        {bus.defectos && (
           <div className="space-y-1">
             <div className="flex items-center space-x-2 text-sm font-medium text-warning">
               <Wrench className="h-4 w-4" />
-              <span>Fallas</span>
+              <span>Defectos</span>
             </div>
             <p className="text-sm text-foreground line-clamp-2">
-              {bus.fallas}
+              {bus.defectos}
             </p>
           </div>
         )}

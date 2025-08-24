@@ -24,8 +24,9 @@ export const BusForm = ({ bus, onSave, onCancel }: BusFormProps) => {
     marca: '' as 'Volvo' | 'Scania' | 'Foton' | '',
     modelo: '' as 'Eléctrico' | 'Petróleo' | '',
     caracteristicas: '',
-    fallas: '',
-    cualidades: '',
+    calefaccion: '' as 'Si' | 'No' | '',
+    aireAcondicionado: '' as 'Si' | 'No' | '',
+    defectos: '',
     fechaFalla: undefined as Date | undefined,
   });
 
@@ -36,8 +37,9 @@ export const BusForm = ({ bus, onSave, onCancel }: BusFormProps) => {
         marca: bus.marca,
         modelo: bus.modelo,
         caracteristicas: bus.caracteristicas,
-        fallas: bus.fallas,
-        cualidades: bus.cualidades,
+        calefaccion: bus.calefaccion,
+        aireAcondicionado: bus.aireAcondicionado,
+        defectos: bus.defectos,
         fechaFalla: bus.fechaFalla,
       });
     }
@@ -62,8 +64,9 @@ export const BusForm = ({ bus, onSave, onCancel }: BusFormProps) => {
       marca: formData.marca as 'Volvo' | 'Scania' | 'Foton',
       modelo: formData.modelo as 'Eléctrico' | 'Petróleo',
       caracteristicas: formData.caracteristicas,
-      fallas: formData.fallas,
-      cualidades: formData.cualidades,
+      calefaccion: formData.calefaccion as 'Si' | 'No',
+      aireAcondicionado: formData.aireAcondicionado as 'Si' | 'No',
+      defectos: formData.defectos,
       fechaFalla: formData.fechaFalla,
     });
   };
@@ -156,30 +159,48 @@ export const BusForm = ({ bus, onSave, onCancel }: BusFormProps) => {
               />
             </div>
 
-            {/* Cualidades */}
+            {/* Calefacción */}
             <div className="space-y-2">
-              <Label htmlFor="cualidades" className="text-sm font-medium">
-                Cualidades
+              <Label htmlFor="calefaccion" className="text-sm font-medium">
+                Calefacción *
               </Label>
-              <Textarea
-                id="cualidades"
-                placeholder="Destaca los puntos fuertes del bus..."
-                value={formData.cualidades}
-                onChange={(e) => setFormData(prev => ({ ...prev, cualidades: e.target.value }))}
-                rows={3}
-              />
+              <Select value={formData.calefaccion} onValueChange={(value) => setFormData(prev => ({ ...prev, calefaccion: value as any }))}>
+                <SelectTrigger>
+                  <SelectValue placeholder="¿Tiene calefacción?" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Si">🔥 Sí</SelectItem>
+                  <SelectItem value="No">❌ No</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
 
-            {/* Fallas */}
+            {/* Aire Acondicionado */}
             <div className="space-y-2">
-              <Label htmlFor="fallas" className="text-sm font-medium">
-                Historial de Fallas
+              <Label htmlFor="aireAcondicionado" className="text-sm font-medium">
+                Aire Acondicionado *
+              </Label>
+              <Select value={formData.aireAcondicionado} onValueChange={(value) => setFormData(prev => ({ ...prev, aireAcondicionado: value as any }))}>
+                <SelectTrigger>
+                  <SelectValue placeholder="¿Tiene aire acondicionado?" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Si">❄️ Sí</SelectItem>
+                  <SelectItem value="No">❌ No</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Defectos */}
+            <div className="space-y-2">
+              <Label htmlFor="defectos" className="text-sm font-medium">
+                Defectos
               </Label>
               <Textarea
-                id="fallas"
-                placeholder="Registra el historial de fallas del vehículo..."
-                value={formData.fallas}
-                onChange={(e) => setFormData(prev => ({ ...prev, fallas: e.target.value }))}
+                id="defectos"
+                placeholder="Registra los defectos del vehículo..."
+                value={formData.defectos}
+                onChange={(e) => setFormData(prev => ({ ...prev, defectos: e.target.value }))}
                 rows={3}
               />
             </div>
@@ -227,7 +248,7 @@ export const BusForm = ({ bus, onSave, onCancel }: BusFormProps) => {
               <Button 
                 type="submit" 
                 className="bg-gradient-to-r from-primary to-secondary text-white"
-                disabled={!formData.ppu || !formData.marca || !formData.modelo}
+                disabled={!formData.ppu || !formData.marca || !formData.modelo || !formData.calefaccion || !formData.aireAcondicionado}
               >
                 <Save className="w-4 h-4 mr-2" />
                 {bus ? 'Actualizar' : 'Crear'} Bus
