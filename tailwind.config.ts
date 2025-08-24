@@ -26,12 +26,22 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					foreground: 'hsl(var(--primary-foreground))',
+					glow: 'hsl(var(--primary-glow))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
 					foreground: 'hsl(var(--secondary-foreground))'
 				},
+				transport: {
+					blue: 'hsl(var(--transport-blue))',
+					orange: 'hsl(var(--transport-orange))'
+				},
+				fleet: {
+					gray: 'hsl(var(--fleet-gray))'
+				},
+				success: 'hsl(var(--success-green))',
+				warning: 'hsl(var(--warning-yellow))',
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
 					foreground: 'hsl(var(--destructive-foreground))'
